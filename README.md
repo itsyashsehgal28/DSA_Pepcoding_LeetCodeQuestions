@@ -14,6 +14,7 @@ Disclaimer : all questions are not found on leetcode some are for practice also
 # PepCoding 
     * Java file 
     * File Naming Convention : Question Name (search video from playlist)
+    * Comments will have the video number in which question was introduced 
 
 # DSA from WEB DEV playlist
     * Contains questions from WEB DEV playlist done in java
