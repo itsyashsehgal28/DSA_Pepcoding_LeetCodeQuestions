@@ -17,5 +17,7 @@ public class InverseOfANumber {
             temp = temp / 10;
         }
         System.out.println(inverse);
+        sc.close();
     }
+    
 }
