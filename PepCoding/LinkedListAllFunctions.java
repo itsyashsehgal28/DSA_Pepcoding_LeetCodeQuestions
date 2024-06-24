@@ -1,12 +1,24 @@
 // video 152 
 
-import java.util.*;
-import java.io.*;
-
-
 public class LinkedListAllFunctions {
     public static void main(String[] args){
-        
+        LinkedList ll = new LinkedList();
+        ll.display();
+        ll.addFirst(10);
+        ll.addFirst(20);
+        ll.addLast(30);
+        ll.display();
+        ll.size();
+        ll.removeFirst();
+        ll.getFirst();
+        ll.getLast();
+        ll.removeLast();
+        ll.display();
+        ll.addFirst(40);
+        ll.addFirst(20);
+        ll.addFirst(50);
+        ll.addAtIndex(3, 90);
+        ll.display();
     }
 
     public static class Node{
@@ -39,6 +51,10 @@ public class LinkedListAllFunctions {
         } 
 
         void display(){
+             if (size ==0){
+                System.out.println("empty list");
+                return;
+            }
             Node temp = head;
             while(temp != null){
                 int data = temp.data; 
@@ -61,47 +77,47 @@ public class LinkedListAllFunctions {
             }
             else{
                 int val = head.data;
-                System.out.print("removing first value : " + val);
+                System.out.println("removing first value : " + val);
                 head = head.next;
                 size--;
             }
         }
 
-        int getFirst(){
+        void getFirst(){
             if(size==0){
                 System.out.println("List is empty");
-                return -1;
+                return ;
             }
             else{
-                return(head.data);
+                System.out.println(head.data);
             }
         }
 
-        int getLast(){
+        void getLast(){
             if(size==0){
                 System.out.println("List is empty");
-                return -1;
+                return;
             }
             else{
-                return(tail.data);
+                System.out.println(tail.data);
             }
         }
 
-        int getAtIndex(int idx){
+        void getAtIndex(int idx){
             if(size==0){
                 System.out.println("List is empty");
-                return -1;
+                return;
             }
             else if(idx < 0 || idx >= size){
                 System.out.println("Invalid Arguements");
-                return -1;
+                return;
             }
             else{
                 Node temp = head;
                 for(int i=0;i<idx;i++){
                     temp = temp.next;
                 }
-                return temp.data;
+                System.out.println(temp.data);
             }  
         }
 
