@@ -1,0 +1,289 @@
+                                        DRIP CAPITAL QUESTIONS for SDE Backend (16.7 lakhs)
+
+                                        
+
+Q1. WRITE A SQL QUERY TO GET THE PERSON ID WITH THIRD HIGHEST SALARY 
+
+ANS .                                                   SELECT DISTINCT salary , ID
+                                                        FROM employees
+                                                        ORDER BY salary DESC
+                                                        LIMIT 1 OFFSET 2;
+
+            This query orders the salaries in descending order and then skips the first two highest salaries (using OFFSET 2),
+            effectively returning the third highest salary.
+
+            For SQL databases that do not support the LIMIT ... OFFSET syntax (such as SQL Server), 
+            you can use a subquery with the ROW_NUMBER() window function:
+
+                                                        SELECT salary
+                                                        FROM (
+                                                                SELECT salary, ROW_NUMBER() OVER (ORDER BY salary DESC) AS row_num
+                                                                FROM employees
+                                                        ) AS ranked_salaries
+                                                        WHERE row_num = 3;
+
+            In this query:
+            The inner query uses the ROW_NUMBER() window function to assign a unique row number to each salary ordered by descending value.
+            The outer query then filters the results to get the row where row_num is 3, which corresponds to the third highest salary.
+            Alternatively, if you are using a database that supports the DENSE_RANK() function, you can use:
+
+            
+                                                        SELECT salary
+                                                        FROM (
+                                                                SELECT salary, DENSE_RANK() OVER (ORDER BY salary DESC) AS rank
+                                                                FROM employees
+                                                        ) AS ranked_salaries
+                                                        WHERE rank = 3;
+
+            This approach is similar but uses DENSE_RANK(), which handles ties by assigning the same rank to identical values. 
+            If two employees have the same highest salary, they both get rank 1, and the next distinct salary gets rank 2, and so on.
+
+
+Q2. IF AN ARRAY CONTAINS DUPLICATE VALUES RETURN TRUE , ELSE RETURN FALSE
+
+ANS.    To check if an array contains duplicates in Java, you can use a HashSet to track the elements you have seen so far. 
+        The basic idea is to iterate through the array and try to add each element to the HashSet. 
+        If adding an element fails (i.e., the element is already in the set), then you have found a duplicate and can return true. 
+        If you complete the loop without finding any duplicates, return false. Here's a sample implementation:
+
+
+                                        import java.util.HashSet;
+
+                                        public class DuplicateChecker {
+                                            public static boolean containsDuplicates(int[] array) {
+                                                HashSet<Integer> seen = new HashSet<>();
+                                                for (int num : array) {
+                                                    if (!seen.add(num)) {
+                                                        return true; // Duplicate found
+                                                    }
+                                                }
+                                                return false; // No duplicates
+                                            }
+
+                                            public static void main(String[] args) {
+                                                int[] array1 = {1, 2, 3, 4, 5};
+                                                int[] array2 = {1, 2, 3, 4, 4};
+
+                                                System.out.println(containsDuplicates(array1)); // Output: false
+                                                System.out.println(containsDuplicates(array2)); // Output: true
+                                            }
+                                        }
+Explanation:
+Import HashSet: Import the HashSet class from the java.util package.
+Define containsDuplicates method:
+Create a HashSet to store seen elements.
+Iterate through the array using an enhanced for loop.
+Attempt to add each element to the HashSet.
+If add returns false, it means the element is already present, so return true.
+
+This solution works efficiently with a time complexity of O(n), where n is the number of elements in the array, 
+and a space complexity of O(n) due to the additional storage used by the HashSet.
+
+
+
+                                                        OTHER SOLUTIONS
+
+
+
+1. Sorting Approach
+By sorting the array first, you can then check for duplicates by comparing adjacent elements.
+Sort the array (time complexity: O(n log n)).
+Iterate through the sorted array to check for adjacent duplicates (time complexity: O(n)).
+Overall time complexity: O(n log n).
+
+
+                                        import java.util.Arrays;
+
+                                        public class DuplicateChecker {
+                                            public static boolean containsDuplicates(int[] array) {
+                                                Arrays.sort(array);
+                                                for (int i = 1; i < array.length; i++) {
+                                                    if (array[i] == array[i - 1]) {
+                                                        return true; // Duplicate found
+                                                    }
+                                                }
+                                                return false; // No duplicates
+                                            }
+
+                                            public static void main(String[] args) {
+                                                int[] array1 = {1, 2, 3, 4, 5};
+                                                int[] array2 = {1, 2, 3, 4, 4};
+
+                                                System.out.println(containsDuplicates(array1)); // Output: false
+                                                System.out.println(containsDuplicates(array2)); // Output: true
+                                            }
+                                        }
+
+
+2. Brute Force Approach
+This approach involves using two nested loops to compare each pair of elements. 
+This is not efficient for large arrays but works for small arrays.
+Use nested loops to compare each pair of elements (time complexity: O(n^2)).
+This is straightforward but inefficient for large arrays.
+
+
+                                        public class DuplicateChecker {
+                                            public static boolean containsDuplicates(int[] array) {
+                                                for (int i = 0; i < array.length; i++) {
+                                                    for (int j = i + 1; j < array.length; j++) {
+                                                        if (array[i] == array[j]) {
+                                                            return true; // Duplicate found
+                                                        }
+                                                    }
+                                                }
+                                                return false; // No duplicates
+                                            }
+
+                                            public static void main(String[] args) {
+                                                int[] array1 = {1, 2, 3, 4, 5};
+                                                int[] array2 = {1, 2, 3, 4, 4};
+
+                                                System.out.println(containsDuplicates(array1)); // Output: false
+                                                System.out.println(containsDuplicates(array2)); // Output: true
+                                            }
+                                        }
+
+
+
+3. Using Java Streams (Java 8+)
+If you are using Java 8 or later, you can leverage the Streams API to achieve this in a concise manner.
+Convert the array to a stream, box it to handle primitive types, and collect it into a set.
+If the set size is less than the array length, there are duplicates (time complexity: O(n) for collecting into the set).
+
+
+                                        import java.util.Arrays;
+                                        import java.util.Set;
+                                        import java.util.stream.Collectors;
+
+                                        public class DuplicateChecker {
+                                            public static boolean containsDuplicates(int[] array) {
+                                                Set<Integer> set = Arrays.stream(array).boxed().collect(Collectors.toSet());
+                                                return set.size() < array.length;
+                                            }
+
+                                            public static void main(String[] args) {
+                                                int[] array1 = {1, 2, 3, 4, 5};
+                                                int[] array2 = {1, 2, 3, 4, 4};
+
+                                                System.out.println(containsDuplicates(array1)); // Output: false
+                                                System.out.println(containsDuplicates(array2)); // Output: true
+                                            }
+                                        }
+
+
+
+Q3. WRITE A PROGRAM OF FACTORIAL IN JAVA
+
+ANS. 
+
+1. Iterative Approach
+This approach uses a simple loop to multiply the numbers from 1 to n.
+
+
+                                        public class Factorial {
+
+                                            public static long factorialIterative(int n) {
+                                                long result = 1;
+                                                for (int i = 1; i <= n; i++) {
+                                                    result *= i;
+                                                }
+                                                return result;
+                                            }
+
+                                            public static void main(String[] args) {
+                                                int number = 5;
+                                                System.out.println("Factorial of " + number + " is: " + factorialIterative(number));
+                                            }
+                                        }
+2. Recursive Approach
+This approach uses recursion to calculate the factorial.
+
+
+                                        public class Factorial {
+
+                                            public static long factorialRecursive(int n) {
+                                                if (n == 0) {
+                                                    return 1;
+                                                }
+                                                return n * factorialRecursive(n - 1);
+                                            }
+
+                                            public static void main(String[] args) {
+                                                int number = 5;
+                                                System.out.println("Factorial of " + number + " is: " + factorialRecursive(number));
+                                            }
+                                        }
+
+
+3. Using Streams (Java 8+)
+This approach uses the Streams API to calculate the factorial.
+
+
+                                        import java.util.stream.LongStream;
+
+                                        public class Factorial {
+
+                                            public static long factorialUsingStreams(int n) {
+                                                return LongStream.rangeClosed(1, n)
+                                                                 .reduce(1, (long a, long b) -> a * b);
+                                            }
+
+                                            public static void main(String[] args) {
+                                                int number = 5;
+                                                System.out.println("Factorial of " + number + " is: " + factorialUsingStreams(number));
+                                            }
+                                        }
+
+
+4. Tail Recursion (Optimized Recursive Approach)
+Some compilers and JVMs can optimize tail-recursive methods to iterative loops, which can help avoid stack overflow for large inputs. 
+Java does not support tail-call optimization natively, but you can implement it with an additional helper method.
+
+
+                                        public class Factorial {
+
+                                            public static long factorialTailRecursive(int n) {
+                                                return factorialHelper(n, 1);
+                                            }
+
+                                            private static long factorialHelper(int n, long acc) {
+                                                if (n == 0) {
+                                                    return acc;
+                                                }
+                                                return factorialHelper(n - 1, n * acc);
+                                            }
+
+                                            public static void main(String[] args) {
+                                                int number = 5;
+                                                System.out.println("Factorial of " + number + " is: " + factorialTailRecursive(number));
+                                            }
+                                        }
+
+
+5. BigInteger for Large Numbers
+For very large numbers, you can use BigInteger from the java.math package to handle the result without overflow.
+
+
+                                        import java.math.BigInteger;
+
+                                        public class Factorial {
+
+                                            public static BigInteger factorialBigInteger(int n) {
+                                                BigInteger result = BigInteger.ONE;
+                                                for (int i = 1; i <= n; i++) {
+                                                    result = result.multiply(BigInteger.valueOf(i));
+                                                }
+                                                return result;
+                                            }
+
+                                            public static void main(String[] args) {
+                                                int number = 20;
+                                                System.out.println("Factorial of " + number + " is: " + factorialBigInteger(number));
+                                            }
+                                        }
+Summary:
+Iterative Approach: Simple and straightforward, uses a loop.
+Recursive Approach: Elegant but may cause stack overflow for large n.
+Streams Approach: Uses Java 8+ Streams API, concise but may not be as intuitive.
+Tail Recursion: Optimized recursion, avoids stack overflow, requires a helper method.
+BigInteger: Handles very large numbers without overflow, useful for large factorials.
