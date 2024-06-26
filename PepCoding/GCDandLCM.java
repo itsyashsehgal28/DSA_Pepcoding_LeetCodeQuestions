@@ -1,0 +1,16 @@
+// video 27
+
+import java.util.*;
+
+public class GCDandLCM {
+    
+    public static void LCM_GCD(){
+
+    }
+    
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int num1 = sc.nextInt();
+        int num2 = sc.nextInt();
+    }
+}
