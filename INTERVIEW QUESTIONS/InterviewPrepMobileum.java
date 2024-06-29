@@ -1,5 +1,5 @@
-// sorting , dsa basics , how to make a function , how array dynamic and static is declared , 
-// queue , linked list all operations 
+// sorting , dsa basics done 
+// queue , linked list all operations and main basic programs done palindrome left 
 
 
 
