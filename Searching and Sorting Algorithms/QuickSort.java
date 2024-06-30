@@ -6,7 +6,7 @@ public class QuickSort {
 
         while(start<end){
 
-            while(arr[start] <= pivot && start<=high){
+            while (start<=high && arr[start] <= pivot){
                 start++;
             }
 
