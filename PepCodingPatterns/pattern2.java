@@ -18,3 +18,12 @@ public class pattern2 {
         sc.close();
     }
 }
+
+/*
+5
+* * * * *
+* * * *
+* * *
+* *
+*
+ */
