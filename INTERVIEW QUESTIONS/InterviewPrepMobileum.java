@@ -217,7 +217,7 @@ class Node{
 class LinkedList {
     Node head= null;
     Node tail= null;
-    int size=0;
+    int size=0; 
     
     void addLast(int n){
             Node temp = new Node();
@@ -322,7 +322,7 @@ class LinkedList {
         if(idx==0){
             addFirst(val);
         }
-        else if(idx<0 || idx>=size){
+        else if(idx<0 || idx>size){
             System.out.println("invalid arguement");
         }
         else if(idx == size){
@@ -360,7 +360,7 @@ class LinkedList {
         if(idx==0){
             removeFirst();
         }
-        else if(idx<0 || idx>=size){
+        else if(idx<0 || idx>size){
             System.out.println("invalid arguement");
         }
         else if(idx == size-1){

@@ -47,27 +47,35 @@ ANS.    To check if an array contains duplicates in Java, you can use a HashSet 
         If you complete the loop without finding any duplicates, return false. Here's a sample implementation:
 
 
-                                        import java.util.HashSet;
+                                    import java.util.HashSet;
 
-                                        public class DuplicateChecker {
-                                            public static boolean containsDuplicates(int[] array) {
-                                                HashSet<Integer> seen = new HashSet<>();
-                                                for (int num : array) {
-                                                    if (!seen.add(num)) {
-                                                        return true; // Duplicate found
-                                                    }
+                                    public class DuplicateChecker {
+                                        public static boolean containsDuplicates(int[] array) {
+                                            if (array == null || array.length == 0) {
+                                                return false; // Null or empty array cannot have duplicates
+                                            }
+                                            
+                                            HashSet<Integer> seen = new HashSet<>();
+                                            for (int num : array) {
+                                                if (!seen.add(num)) {
+                                                    return true; // Duplicate found
                                                 }
-                                                return false; // No duplicates
                                             }
-
-                                            public static void main(String[] args) {
-                                                int[] array1 = {1, 2, 3, 4, 5};
-                                                int[] array2 = {1, 2, 3, 4, 4};
-
-                                                System.out.println(containsDuplicates(array1)); // Output: false
-                                                System.out.println(containsDuplicates(array2)); // Output: true
-                                            }
+                                            return false; // No duplicates
                                         }
+                                    
+                                        public static void main(String[] args) {
+                                            int[] array1 = {1, 2, 3, 4, 5};
+                                            int[] array2 = {1, 2, 3, 4, 4};
+                                            int[] array3 = {}; // Empty array
+                                            int[] array4 = null; // Null array
+                                    
+                                            System.out.println(containsDuplicates(array1)); // Output: false
+                                            System.out.println(containsDuplicates(array2)); // Output: true
+                                            System.out.println(containsDuplicates(array3)); // Output: false
+                                            System.out.println(containsDuplicates(array4)); // Output: false
+                                        }
+                                    }
 Explanation:
 Import HashSet: Import the HashSet class from the java.util package.
 Define containsDuplicates method:
