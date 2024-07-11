@@ -1,18 +1,22 @@
-public class MergeSort{
 
+
+public class MergeSort{
     
     public static int[] ms(int[]arr , int low , int high){
         
         if(low == high){
+            // base case
             int ba[] = new int[1];
+            // ba means base array which will only contain 1 element
             ba[0] = arr[low];
+            // ba[0] = arr[high] doesnt matter as there is only 1 element hence low and high are same
             return ba;
         }
 
         int mid=(low+high)/2;
-        int[] fsh = ms(arr , low , mid);
-        int[] ssh = ms(arr , mid+1 , high);
-        int[] fsa = mergeTwoSortedArrays(fsh, ssh);
+        int[] fsh = ms(arr , low , mid);                // first sorted half
+        int[] ssh = ms(arr , mid+1 , high);             // second sorted half
+        int[] fsa = mergeTwoSortedArrays(fsh, ssh);     // full sorted array
         return fsa;
     }
 
