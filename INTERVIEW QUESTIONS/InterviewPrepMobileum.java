@@ -85,7 +85,7 @@ class Stack {
     }
     
     void push (int data){
-        if(top>=max-1){
+        if(top>max-1){
             System.out.println("overflow");
             return;
         }
@@ -253,18 +253,19 @@ class LinkedList {
     void removeFirst(){
         if(size==0){
             System.out.println("empty list");
+            System.out.println();
+            return;
         }
         else if(size==1){
             System.out.print("removing :" + head.data);
-            size--;
             head = tail = null;
         }
         else{
             System.out.print("removing :" + head.data);
             head = head.next;
-            size--;
-        }
-        
+            }
+            
+        size--;
         System.out.println();
     }
     
@@ -291,7 +292,7 @@ class LinkedList {
             System.out.println("empty list");
             return;
         }
-        else if(idx<0 || idx>=size){
+        else if(idx<0 || idx>size-1){
             System.out.println("invalid arguement");
             return;
         }
