@@ -144,7 +144,7 @@ class Queue {
     }
     
     void EnQueue (int data){
-        if(size >=max-1){
+        if(size == max){
             System.out.println("queue overflow");
             return;
         }
@@ -152,14 +152,13 @@ class Queue {
             arr[++rear] = data;
             System.out.println("added " + data);
             front++;
-            size++;
-            return;
         }
         else{
             arr[++rear] = data;
             System.out.println("added " + data);
-            size++;
         }
+
+        size++;
     }
     
     void display(){
@@ -171,17 +170,18 @@ class Queue {
     void DeQueue(){
         if(size==0){
             System.out.println("underflow");
+            return;
         }
         else if(size == 1){
-            System.out.println("deleted value is " + arr[rear]);
+            System.out.println("deleted value is " + arr[front]);  // rear or front doesnt matter , since pointing at same place
             rear = front = -1;
-            size --;
         }
         else {
             System.out.println("deleted value is :" + arr[front]);
             front++;
-            size--;
         }
+
+        size++;
     }
     
     void size(){
@@ -233,7 +233,7 @@ class LinkedList {
         size++;
     }
     
-    void llsize(){
+    void size(){
         System.out.println(size);
     }
     
@@ -383,7 +383,7 @@ public class CustomLinkedList {
         ll.addLast(30);
         ll.addLast(20);
         ll.addLast(10);
-        ll.llsize();
+        ll.size();
         ll.display();
         ll.removeFirst();
         ll.display();
