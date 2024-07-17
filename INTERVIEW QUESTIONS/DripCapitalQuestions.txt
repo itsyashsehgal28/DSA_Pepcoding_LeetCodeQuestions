@@ -1,5 +1,5 @@
                                         DRIP CAPITAL QUESTIONS for SDE Backend (16.7 lakhs)
-
+                                                    REJECTED IN FIRST ROUND
                                         
 
 Q1. WRITE A SQL QUERY TO GET THE PERSON ID WITH THIRD HIGHEST SALARY 

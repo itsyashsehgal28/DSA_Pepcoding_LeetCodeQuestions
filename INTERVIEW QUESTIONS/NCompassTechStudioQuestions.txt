@@ -1,0 +1,54 @@
+                                                NCompass TechStudio SDE 10-12 LPA
+                                                            3 ROUNDS
+                                2 HOUR ASSIGNMENT --> TECHNICAL INTERVIEW --> TECHNICAL + HR ROUND
+
+ROUND 1 WAS DONE ON EVALGROUND , CONSISTED OF 5 ROUNDS :
+1.  Basic Coding 4 questions in 1 hour (lakshay chat)
+2.  Intermediate Coding 1 question in half hour 
+3.  SQL 4 questions in 20 mins (2 were wrong)
+4.  Logical Reasoning 5 questions
+5.  English comprehension 5 questions 
+
+
+ROUND 2 WAS TECHNICAL ROUND 
+1.  WHAT DO YOU MEAN BY DYNAMIC SCHEMA IN MONGODB ? 
+ANS.    In MongoDB, a dynamic schema allows you to store documents with different structures in the same collection. 
+        Unlike relational databases such as PostgreSQL, where the schema is predefined and enforced, MongoDB’s schema is flexible, 
+        allowing for different fields and data types within the same collection.
+
+        Here’s an example of how to work with a dynamic schema in MongoDB:
+
+        db.exampleCollection.insertOne({ name: "Alice", age: 25 });
+        db.exampleCollection.insertOne({ name: "Bob", address: "123 Main St" });
+        db.exampleCollection.insertOne({ name: "Charlie", age: 30, email: "charlie@example.com" });
+
+
+2.  WHAT IS A COLLECTION OF DOCUMENTS IN MONGODB CALLED ? 
+ANS.    A collection of documents in MongoDB is called a "collection."
+
+        In MongoDB, a collection is analogous to a table in a relational database. It is a grouping of MongoDB documents, 
+        and all documents within a collection can have different fields and data types. Collections do not enforce a schema, 
+        which allows for flexible data models.  
+
+
+3.  retrieve the employee name whose salary is greater than the average salary of their department in PostgreSQL ?
+ANS.    SELECT e.name
+        FROM employees e
+        WHERE e.salary > (
+            SELECT AVG(e2.salary)
+            FROM employees e2
+            WHERE e2.department_id = e.department_id
+        );
+
+        In this query:
+
+        The subquery calculates the average salary for each department (AVG(e2.salary) WHERE e2.department_id = e.department_id).
+        The main query selects the employee names (e.name) whose salary is greater than the average salary of their department.
+
+
+
+                                            ROUND 2 (HR + TECHNICAL ROUND)
+
+
+
+

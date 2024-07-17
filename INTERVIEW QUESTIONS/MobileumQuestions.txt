@@ -1,0 +1,151 @@
+                                                MOBILEUM ASSOCIATE SDE INTERN (30000 STIPEND)
+                                                2 ROUNDS CLEARED (APTITUDE TEST + TECHNICAL)
+
+ROUND 1 --->    APTITUDE TEST BASED ON REASONING , LOGICAL , CODING , SQL
+
+ROUND 2 --->    TECHNICAL ROUND WITH ATUL 
+
+1.  EXPLAINS THREADS IN JAVA ?
+ANS.    Creating and managing threads in Java involves working with the Thread class or implementing the Runnable interface. 
+        Here's an example of how to create and start a thread in Java using both approaches:
+
+        USING THE "THREADS" CLASS:
+
+        public class MyThread extends Thread {
+            
+            public void run() {
+                // Code that the thread will execute
+                System.out.println("Thread is running...");
+            }
+
+            public static void main(String[] args) {
+                MyThread thread = new MyThread();
+                thread.start();  // Start the thread
+            }
+        }
+
+        You create a new class that extends Thread.
+        Override the run() method to define the code that should be executed in the thread.
+        Create an instance of your thread class and call the start() method to begin execution.
+
+
+
+        USING THE "RUNNABLE" INTERFACE
+
+        public class MyRunnable implements Runnable {
+            public void run() {
+                // Code that the thread will execute
+                System.out.println("Thread is running...");
+            }
+
+            public static void main(String[] args) {
+                MyRunnable myRunnable = new MyRunnable();
+                Thread thread = new Thread(myRunnable);
+                thread.start();  // Start the thread
+            }
+        }
+
+        You create a new class that implements Runnable.
+        Implement the run() method to define the code that should be executed in the thread.
+        Create an instance of the Thread class, passing an instance of your Runnable class to the Thread constructor.
+        Call the start() method on the Thread instance to begin execution.
+
+
+        The run() method contains the code that the thread will execute.
+        Calling start() on a thread instance begins its execution in a separate call stack.
+        You should avoid calling the run() method directly; instead, always use start() to ensure the code runs in a new thread.
+
+
+
+2.  EXPLAIN POLYMORPHISM IN OOPS ? 
+ANS.    Polymorphism is a core concept in object-oriented programming (OOP) that allows objects to be treated as instances 
+        of their parent class rather than their actual class. This enables one interface to be used for a general class of actions. 
+        The specific action is determined by the exact nature of the situation.
+
+        There are two main types of polymorphism in Java:
+
+        Compile-time polymorphism (Method Overloading)
+        Runtime polymorphism (Method Overriding)
+
+
+        COMPILE TIME POLYMORPHISM OR STATIC POLYMORPHISM OR EARLY BINDING (Method Overloading , OPERATOR OVERLOADING)
+
+        Method overloading occurs when two or more methods in the same class have the same name but different parameters 
+        (different type or number of parameters). The compiler determines which method to execute based on the method signature.
+
+        class OverloadExample {
+            void display(int a) {
+                System.out.println("Argument: " + a);
+            }
+
+            void display(String a) {
+                System.out.println("Argument: " + a);
+            }
+
+            public static void main(String[] args) {
+                OverloadExample obj = new OverloadExample();
+                obj.display(10);       // Calls display(int a)
+                obj.display("Hello");  // Calls display(String a)
+            }
+        }
+
+
+        RUNTIME POLYMORPHISM OR DYNAMIC POLYMORPHISM OR LATE BINDING (METHOD OVERRIDING)
+
+        Method overriding occurs when a subclass provides a specific implementation of a method that is already defined in its 
+        superclass. The overridden method in the subclass has the same name, return type, and parameters as the method in the 
+        parent class. At runtime, the JVM determines which method to execute based on the object's actual type.
+
+        class Animal {
+            void sound() {
+                System.out.println("Animal makes a sound");
+            }
+        }
+
+        class Dog extends Animal {
+            @Override
+            void sound() {
+                System.out.println("Dog barks");
+            }
+        }
+
+        class Cat extends Animal {
+            @Override
+            void sound() {
+                System.out.println("Cat meows");
+            }
+        }
+
+        public class TestPolymorphism {
+            public static void main(String[] args) {
+                Animal myAnimal = new Animal();
+                Animal myDog = new Dog();
+                Animal myCat = new Cat();
+
+                myAnimal.sound();  // Outputs: Animal makes a sound
+                myDog.sound();     // Outputs: Dog barks
+                myCat.sound();     // Outputs: Cat meows
+            }
+        }
+
+
+3.  HOW TO CONTROL CONCURRENCY ? 
+ANS.    Controlling concurrency in Java involves managing the access to shared resources by multiple threads to ensure data 
+        consistency and prevent race conditions. Here are some common techniques and tools for controlling concurrency in Java:
+
+        1. Synchronized Methods and Blocks
+        Using the synchronized keyword ensures that only one thread can execute a block of code or method at a time.
+
+        Synchronized Method
+
+        public class Counter {
+            private int count = 0;
+
+            public synchronized void increment() {
+                count++;
+            }
+
+            public int getCount() {
+                return count;
+            }
+        }       
