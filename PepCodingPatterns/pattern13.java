@@ -8,6 +8,15 @@ public class pattern13 {
 
         int n = sc.nextInt();
 
+        for(int i=1;i<=n;i++){
+            for(int j=1;j<=i;j++){
+                System.out.print("*\t");
+            }
+            System.out.println();
+        }
+
+
+
         sc.close();
     }
 }

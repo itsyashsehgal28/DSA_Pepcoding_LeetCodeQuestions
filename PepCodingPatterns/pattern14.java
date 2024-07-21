@@ -5,7 +5,5 @@ public class pattern14 {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         sc.close();
-        will be adding stuff tomorrow rest today
-            rest again 
     }
 }
